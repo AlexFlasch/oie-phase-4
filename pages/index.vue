@@ -21,17 +21,26 @@
 
 <template>
     <section class="container">
+        <Tile v-for="useCase in useCases"
+              :data="useCase"
+              :key="$index">
+        </Tile>
     </section>
 </template>
 
 <script>
 import axios from '~plugins/axios';
 
+import Tile from '~components/tile';
+
 export default {
+    components: {
+        Tile,
+    },
     async asyncData() {
-        const { data } = await axios.get('/api/users');
+        const { data } = await axios.get('/api/usecases');
         return {
-            users: data,
+            useCases: data,
         };
     },
     head() {

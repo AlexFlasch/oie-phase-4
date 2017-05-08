@@ -12,6 +12,25 @@ app.set('port', port)
 // Import API Routes
 app.use('/api', api)
 
+function logAllRoutes(routes) {
+    let Table = require('cli-table');
+    let table = new Table({ head: ["", "Path"] });
+
+    for (let key in routes) {
+        if (routes.hasOwnProperty(key)) {
+            let val = routes[key];
+            if(val.route) {
+                val = val.route;
+                let _o = {};
+                _o[val.stack[0].method]  = [val.path];
+                table.push(_o);
+            }
+        }
+    }
+
+   console.log(table.toString());
+}
+
 // Import and Set Nuxt.js options
 let config = require('../nuxt.config.js')
 config.dev = !(process.env.NODE_ENV === 'production')
@@ -30,5 +49,7 @@ if (config.dev) {
 }
 
 // Listen the server
-app.listen(port, host)
+app.listen(port, host, function() {
+    logAllRoutes(app._router.stack);
+})
 console.log('Server listening on ' + host + ':' + port) // eslint-disable-line no-console

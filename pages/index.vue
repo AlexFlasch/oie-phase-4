@@ -23,7 +23,7 @@
     <section class="container">
         <Tile v-for="useCase in useCases"
               :data="useCase"
-              :key="$index">
+              :key="useCase.id">
         </Tile>
     </section>
 </template>

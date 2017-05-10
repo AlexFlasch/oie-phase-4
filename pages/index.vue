@@ -1,31 +1,31 @@
 <style scoped lang="scss">
 .title {
-    margin: 30px 0;
-}
-.users {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-}
-.user {
-    margin: 10px 0;
+    margin-bottom: 30px;
 }
 
-.container {
+.tiles-container {
     display: flex;
 
-    justify-content: center;
-    align-items: center;
+    width: 100vw;
+    height: 100vh;
+
+    z-index: 1;
+
+    justify-content: space-around;
+    align-items: flex-start;
 }
 </style>
 
 <template>
-    <section class="container">
-        <Tile v-for="useCase in useCases"
-              :data="useCase"
-              :key="useCase.id">
-        </Tile>
-    </section>
+    <div class="container">
+        <div class="title">OIE Phase 4</div>
+        <section class="tiles-container">
+            <Tile v-for="useCase in useCases"
+                  :data="useCase"
+                  :key="useCase.id">
+            </Tile>
+        </section>
+    </div>
 </template>
 
 <script>
@@ -38,7 +38,12 @@ export default {
         Tile,
     },
     async asyncData() {
-        const { data } = await axios.get('/api/usecases');
+        const useCasePromises = axios.get('/api/usecases')
+            .catch(err => ({
+                err,
+            }));
+
+        const { data } = await useCasePromises;
         return {
             useCases: data,
         };

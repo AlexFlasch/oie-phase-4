@@ -20,9 +20,6 @@ router.get('/usecases/:id', function (req, res, next) {
         return use.id === id;
     })[0];
 
-    console.log(useCase);
-    console.log('something');
-
     if(useCase !== undefined) {
         res.json(useCase);
     } else {

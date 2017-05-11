@@ -14,7 +14,10 @@ module.exports = {
   rules: {
       "indent": ["error", 4],
       "import/extensions": 0,
-      "import/no-unresolved": ["off"]
+      "import/no-unresolved": ["off"],
+      "array-callback-return": 0,
+      "no-param-reassign": 0,
+      "no-plusplus": [ "error", { "allowForLoopAfterthoughts": true }],
   },
   globals: {}
 }

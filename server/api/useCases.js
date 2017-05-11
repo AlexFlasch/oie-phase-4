@@ -7,12 +7,12 @@ var sequelize = new Sequelize('mariadb://flasca50:0625150@localhost:3306/flasca5
 
 
 var uc1 =" select \
-    a.FirstName, \
-    a.LastName, \
+    a.FirstName as `First Name`, \
+    a.LastName as `Last Name`, \
     a.Email, \
-    s.Name, \
-    priority1.Name as choice1, \
-    priority2.Name as choice2 \
+    s.Name as `Home University`, \
+    priority1.Name as `First Choice`, \
+    priority2.Name as `Second Choice` \
 from \
     Accounts as a \
     inner join InboundInfo as ii on ii.AccountId = a.Id \
@@ -44,12 +44,12 @@ order by \
     hs.Schools_Id;"
 
 var uc2 =" select \
-    a.FirstName, \
-    a.LastName, \
+    a.FirstName as `First Name`, \
+    a.LastName as `Last Name`, \
     a.Email, \
-    s.Name, \
-    priority1.Name as choice1, \
-    priority2.Name as choice2 \
+    s.Name as `Home University`, \
+    priority1.Name as `First Choice`, \
+    priority2.Name as `Second Choice` \
 from \
     Accounts as a \
     inner join OutboundInfo as ii on ii.AccountId = a.Id \
@@ -83,13 +83,13 @@ order by \
 function getQuery(req,res,next){
     var qID = parseInt(req.params.id);
     switch(qID){
-        case 1: var query = uc1;
+        case 0: var query = uc1;
                 break;
-        case 2: var query = uc2;
+        case 1: var query = uc2;
+                break;
+        case 2: var query = uc1;
                 break;
         case 3: var query = uc1;
-                break;
-        case 4: var query = uc1;
                 break;
         default:
                 var query = uc1;
@@ -105,15 +105,15 @@ function getQuery(req,res,next){
 }
 
 // Mock Users
-/*const useCases = [
-    { id: 0, name: 'Use Case 1', desc: 'All Hessen students and their UW choices.', data: y},
-    { id: 1, name: 'Use Case 2', desc: 'All UW students and their Hessen choices.', data: x}
+const useCases = [
+    { id: 0, name: 'Use Case 1', desc: 'All Hessen students and their UW choices.' },
+    { id: 1, name: 'Use Case 2', desc: 'All UW students and their Hessen choices.' }
 ];
-*/
+
 /* GET users listing. */
-/*router.get('/usecases', function (req, res, next) {
+router.get('/usecases', function (req, res, next) {
     res.json(useCases);
-});*/
+});
 
 /* GET user by ID. */
 router.get('/usecases/:id', getQuery);

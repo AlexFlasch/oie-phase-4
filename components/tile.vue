@@ -132,12 +132,27 @@
     }
 }
 
-.push-right {
+.display-title {
     display: flex;
 
-    justify-content: flex-end;
+    justify-content: space-between;
+    align-items: center;
 
     width: 100%;
+}
+
+.usecase-title {
+    font-size: 1.25rem;
+
+    padding: 5px;
+
+    border-bottom-color: #fff;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+
+    border-right-color: #fff;
+    border-right-width: 1px;
+    border-right-style: solid;
 }
 
 .close-button {
@@ -146,6 +161,15 @@
     padding: 0.5rem;
 
     cursor: pointer;
+}
+
+.display-data {
+    display: flex;
+
+    justify-content: center;
+
+    width: 100%;
+    height: 100%;
 }
 
 </style>
@@ -159,29 +183,52 @@
             {{ data.desc }}
         </div>
         <div :class="[ 'tile-display', { open: isOpen }]">
-            <div class="push-right">
+            <div class="display-title">
+                <div class="usecase-title">
+                    {{ data.name }}
+                </div>
                 <div class="close-button" @click.stop="closeUseCase()">
                     x
                 </div>
+            </div>
+            <div class="display-data">
+                <data-display :data="useCaseData">
+                </data-display>
             </div>
         </div>
     </div>
 </template>
 
 <script>
+import axios from '~plugins/axios';
+
+import dataDisplay from '~components/data-display';
+
 export default {
-    components: { },
+    components: {
+        dataDisplay,
+    },
     props: [
         'data',
     ],
     data() {
         return {
             isOpen: false,
+            useCaseData: [],
         };
     },
     methods: {
-        openUseCase() {
+        async openUseCase() {
             this.isOpen = true;
+
+            const useCasePromise = axios.get(`/api/usecases/${this.data.id}`)
+                .catch(err => ({
+                    err,
+                }));
+
+            const { data } = await useCasePromise;
+
+            this.useCaseData = data;
 
             this.$el.style.zIndex = 99;
         },

@@ -80,16 +80,47 @@ from \
 order by \
     hs.Schools_Id;"
 
+var uc3 = "select \
+    a.FirstName, \
+    a.LastName, \
+    a.Email, \
+    s.Term \
+from \
+    Accounts as a \
+    inner join Students as s on a.Id = s.AccountId \
+order by \
+    s.Term;"
+
+
+var uc4 = "select  \
+    a.FirstName, \
+    a.LastName, \
+    a.Id, \
+    r.RoleName, \
+    s.Name \
+from \
+    Accounts as a \
+    inner join Roles as r on r.Id = a.RoleId \
+    inner join HomeSchool as hs on a.Id = hs.Accounts_Id \
+    inner join Schools as s on hs.Schools_Id = s.Id \
+    inner join Addresses as ad on s.AddressId = ad.Id \
+where \
+    (r.Id = 2 or r.Id = 3) \
+    and \
+    ad.Country = 'United States' \
+order by \
+    s.Id;"
+
 function getQuery(req,res,next){
     var qID = parseInt(req.params.id);
     switch(qID){
-        case 1: var query = uc1;
+        case 0: var query = uc1;
                 break;
-        case 2: var query = uc2;
+        case 1: var query = uc2;
                 break;
-        case 3: var query = uc1;
+        case 2: var query = uc3;
                 break;
-        case 4: var query = uc1;
+        case 3: var query = uc4;
                 break;
         default:
                 var query = uc1;

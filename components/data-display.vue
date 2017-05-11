@@ -25,10 +25,14 @@ table {
 
     & th {
         padding: 5px;
+
+        font-size: 1.35rem;
     }
 
     & td {
         padding: 5px;
+
+        font-size: 1.15rem;
     }
 }
 

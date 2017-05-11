@@ -81,8 +81,8 @@ order by \
     hs.Schools_Id;"
 
 var uc3 = "select \
-    a.FirstName, \
-    a.LastName, \
+    a.FirstName as `First Name`, \
+    a.LastName as `Last Name`, \
     a.Email, \
     s.Term \
 from \
@@ -93,11 +93,10 @@ order by \
 
 
 var uc4 = "select  \
-    a.FirstName, \
-    a.LastName, \
-    a.Id, \
-    r.RoleName, \
-    s.Name \
+    a.FirstName as `First Name`, \
+    a.LastName as `Last Name`, \
+    r.RoleName as `Role`, \
+    s.Name as `Home University` \
 from \
     Accounts as a \
     inner join Roles as r on r.Id = a.RoleId \
@@ -138,7 +137,9 @@ function getQuery(req,res,next){
 // Mock Users
 const useCases = [
     { id: 0, name: 'Use Case 1', desc: 'All Hessen students and their UW choices.' },
-    { id: 1, name: 'Use Case 2', desc: 'All UW students and their Hessen choices.' }
+    { id: 1, name: 'Use Case 2', desc: 'All UW students and their Hessen choices.' },
+    { id: 2, name: 'Use Case 3', desc: 'All UW students and their application terms.' },
+    { id: 3, name: 'Use Case 5', desc: 'All UW staff members and their campuses' }
 ];
 
 /* GET users listing. */

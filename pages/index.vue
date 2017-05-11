@@ -13,6 +13,7 @@
 
     justify-content: space-around;
     align-items: flex-start;
+    flex-wrap: wrap;
 }
 </style>
 

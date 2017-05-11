@@ -11,14 +11,15 @@
     align-items: center;
     flex-direction: column;
 
-    width: 40vmax;
-    height: 40vmax;
+    width: 35vmax;
+    height: 35vmax;
 
     cursor: pointer;
 
     box-sizing: border-box;
 
     padding: 1.25vmax;
+    margin-bottom: 1.25vmax;
 
     background-color: #fff;
 
@@ -44,8 +45,8 @@
 
         box-sizing: border-box;
 
-        width: 40vmax;
-        height: 40vmax;
+        width: 35vmax;
+        height: 35vmax;
 
         padding: 1.25vmax;
 
@@ -61,8 +62,8 @@
     }
 
     &:hover::before {
-        width: 42.5vmax;
-        height: 42.5vmax;
+        width: 37.5vmax;
+        height: 37.5vmax;
 
         box-sizing: border-box;
     }
@@ -142,7 +143,7 @@
 }
 
 .usecase-title {
-    font-size: 1.25rem;
+    font-size: 1.5rem;
 
     padding: 5px;
 
